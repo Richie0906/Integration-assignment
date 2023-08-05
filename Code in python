@@ -1,0 +1,56 @@
+pip install requests
+pip install Flask
+
+import requests
+from flask import Flask, request, jsonify
+
+app = Flask(_name_)
+
+# Airtable API configuration
+AIRTABLE_API_KEY = 'YOUR_AIRTABLE_API_KEY'
+AIRTABLE_BASE_ID = 'YOUR_AIRTABLE_BASE_ID'
+AIRTABLE_TABLE_NAME = 'Asana Tasks'
+
+# Asana webhook endpoint
+ASANA_WEBHOOK_SECRET = 'YOUR_ASANA_WEBHOOK_SECRET'
+ASANA_TASK_ENDPOINT = '/asana/task-created'
+
+@app.route(ASANA_TASK_ENDPOINT, methods=['POST'])
+def handle_asana_task_created():
+    data = request.get_json()
+    if 'data' in data and 'new' in data['data']:
+        new_task = data['data']['new']
+
+        # Extract relevant task details
+        task_id = new_task['id']
+        name = new_task['name']
+        assignee = new_task.get('assignee', '')
+        due_date = new_task.get('due_date', '')
+        description = new_task.get('description', '')
+
+        # Post the task details to Airtable
+        airtable_data = {
+            'fields': {
+                'Task ID': task_id,
+                'Name': name,
+                'Assignee': assignee,
+                'Due Date': due_date,
+                'Description': description
+            }
+        }
+        headers = {
+            'Authorization': f'Bearer {AIRTABLE_API_KEY}',
+            'Content-Type': 'application/json'
+        }
+        airtable_url = f'https://api.airtable.com/v0/{AIRTABLE_BASE_ID}/{AIRTABLE_TABLE_NAME}'
+        response = requests.post(airtable_url, json=airtable_data, headers=headers)
+
+        if response.status_code == 200:
+            return jsonify({'message': 'Task copied to Airtable successfully'}), 200
+        else:
+            return jsonify({'message': 'Error copying task to Airtable'}), response.status_code
+
+    return jsonify({'message': 'Invalid request'}), 400
+
+if _name_ == '_main_':
+    app.run(port=5000)
