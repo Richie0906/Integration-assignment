@@ -1,0 +1,22 @@
+Documentation 
+1.	README.md: Create a README.md file at the root of your repository. This file serves as the primary documentation for your project and is displayed on the GitHub repository page. In this file, you can provide an overview of your integration project, its purpose, and how to use it.
+
+2.	Project Structure: This is to describe the structure of my project in the README.md. mentioning the main files, their purposes, and how they interact with each other.
+
+3.	Installation: In this I provide instructions on how to set up the project on a local machine and include information on installing required dependencies and how to run the application.
+
+4.	Usage: Explain how users can use the integration to connect Asana and Airtable. Include information on how to configure Asana webhooks, obtain Airtable API keys, and configure Airtable accordingly. Also, providing details on how to run the Python application that serves as the integration service.
+
+5.	Code Explanation: Add comments and explanations in the code to help readers understand the implementation details. For complex sections, consider adding comments that clarify the logic or purpose of specific functions or blocks of code.
+
+6.	Environment Variables: If code uses environment variables (e.g., Airtable API key), mention them in the README.md and how to set them up and keeping sensitive information like API keys out of version control.
+
+7.	Deployment: If my integration is intended to run on a server, provide guidance on how to deploy the application. We can use tools like Docker, Heroku, or others, and you can add deployment instructions in the README.md.
+
+8.	Testing: If applicable, describe how to test the integration to ensure everything is working as expected. Mention any test data or scenarios to consider.
+
+9.	Contributing: If wanted to invite others to contribute to your project, include guidelines on how they can do that. Specify the contribution process, code style, and pull request requirements.
+
+
+10.	License: Including a license file (e.g., LICENSE.txt) to specify the terms under which the project is distributed.
+This is the documentation process for the integration to connect Asana and Airtable
